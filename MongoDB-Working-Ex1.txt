@@ -1,0 +1,132 @@
+>db
+test
+
+> db.firstdoc.insert({"name":"Europe"})
+WriteResult({ "nInserted" : 1 })
+
+#Looking for options at DB level
+> db.
+db.adminCommand(               db.getCollection(              db.group(                      db.runCommandWithMetadata(
+db.auth(                       db.getCollectionInfos(         db.groupcmd(                   db.runReadCommand(
+db.changeUserPassword(         db.getCollectionNames(         db.groupeval(                  db.serverBits(
+db.cloneCollection(            db.getLastError(               db.hasOwnProperty              db.serverBuildInfo(
+db.cloneDatabase(              db.getLastErrorCmd(            db.help(                       db.serverCmdLineOpts(
+db.commandHelp(                db.getLastErrorObj(            db.hostInfo(                   db.serverStatus(
+db.constructor                 db.getLogComponents(           db.isMaster(                   db.setLogLevel(
+db.copyDatabase(               db.getMongo(                   db.killOP(                     db.setProfilingLevel(
+db.createCollection(           db.getName(                    db.killOp(                     db.setSlaveOk(
+db.createRole(                 db.getPrevError(               db.listCommands(               db.setWriteConcern(
+db.createUser(                 db.getProfilingLevel(          db.loadServerScripts(          db.shutdownServer(
+db.createView(                 db.getProfilingStatus(         db.logout(                     db.stats(
+db.currentOP(                  db.getQueryOptions(            db.printCollectionStats(       db.toLocaleString
+db.currentOp(                  db.getReplicationInfo(         db.printReplicationInfo(       db.toString(
+db.dbEval(                     db.getRole(                    db.printShardingStatus(        db.tojson(
+db.dropAllRoles(               db.getRoles(                   db.printSlaveReplicationInfo(  db.unsetWriteConcern(
+db.dropAllUsers(               db.getSiblingDB(               db.propertyIsEnumerable        db.updateRole(
+db.dropDatabase(               db.getSisterDB(                db.prototype                   db.updateUser(
+db.dropRole(                   db.getSlaveOk(                 db.removeUser(                 db.upgradeCheck(
+db.dropUser(                   db.getUser(                    db.repairDatabase(             db.upgradeCheckAllDBs(
+db.eval(                       db.getUsers(                   db.resetError(                 db.valueOf(
+db.firstdoc                    db.getWriteConcern(            db.revokePrivilegesFromRole(   db.version(
+db.forceError(                 db.grantPrivilegesToRole(      db.revokeRolesFromRole(
+db.fsyncLock(                  db.grantRolesToRole(           db.revokeRolesFromUser(
+db.fsyncUnlock(                db.grantRolesToUser(           db.runCommand(
+
+> db.getCollectionNames()
+[ "firstdoc" ]
+
+> show dbs
+admin  0.000GB
+local  0.000GB
+test   0.000GB
+
+> use mycustomers
+switched to db mycustomers
+
+> db
+mycustomers
+
+> show dbs
+admin  0.000GB
+local  0.000GB
+test   0.000GB
+
+> db.customers.insert({
+... "first_name":"Cool",
+... "last_name": "Singh",
+... memberships: ["club1","club2"],
+... address: {"city": "hilde","country":"Ger"},
+... contacts: [{"name": "Tom","relationship":"Friend"}]})
+WriteResult({ "nInserted" : 1 })
+
+> show collections
+customers
+
+> db.customers.find()
+{ "_id" : ObjectId("5cc936c61cd2cda82061b0e5"), "first_name" : "Cool", "last_name" : "Singh", "memberships" : [ "club1", "club2" ], "address" : { "city" : "hilde", "country" : "Ger" }, "contacts" : [ { "name" : "Tom", "relationship" : "Friend" } ] }
+
+> db.customers.insert({first_name:"Hot",last_name: "Singh"})
+WriteResult({ "nInserted" : 1 })
+> db.customers.find()
+{ "_id" : ObjectId("5cc936c61cd2cda82061b0e5"), "first_name" : "Cool", "last_name" : "Singh", "memberships" : [ "club1", "club2" ], "address" : { "city" : "hilde", "country" : "Ger" }, "contacts" : [ { "name" : "Tom", "relationship" : "Friend" } ] }
+{ "_id" : ObjectId("5cc938641cd2cda82061b0e6"), "first_name" : "Hot", "last_name" : "Singh" }
+
+> show dbs
+admin        0.000GB
+local        0.000GB
+mycustomers  0.000GB
+test         0.000GB
+
+>show collections;
+customers
+> db.createCollection("ImpCustomers")
+{ "ok" : 1 }
+> show collections;
+ImpCustomers
+customers
+
+> db.ImpCustomers.insert({first_name:"Hot",last_name: "Singh"})
+WriteResult({ "nInserted" : 1 })
+> db.ImpCustomers.find()
+{ "_id" : ObjectId("5cc9399a1cd2cda82061b0e7"), "first_name" : "Hot", "last_name" : "Singh" }
+
+#Looking for options at collections level
+> db.customers.
+db.customers.addIdIfNeeded(              db.customers.getDiskStorageStats(        db.customers.pagesInRAM(
+db.customers.aggregate(                  db.customers.getFullName(                db.customers.propertyIsEnumerable
+db.customers.bulkWrite(                  db.customers.getIndexKeys(               db.customers.prototype
+db.customers.constructor                 db.customers.getIndexSpecs(              db.customers.reIndex(
+db.customers.convertToCapped(            db.customers.getIndexes(                 db.customers.remove(
+db.customers.convertToSingleObject(      db.customers.getIndices(                 db.customers.renameCollection(
+db.customers.copyTo(                     db.customers.getMongo(                   db.customers.replaceOne(
+db.customers.count(                      db.customers.getName(                    db.customers.runCommand(
+....
+
+#Using helper function
+> db.customers.find().pretty()
+{
+	"_id" : ObjectId("5cc936c61cd2cda82061b0e5"),
+	"first_name" : "Cool",
+	"last_name" : "Singh",
+	"memberships" : [
+		"club1",
+		"club2"
+	],
+	"address" : {
+		"city" : "hilde",
+		"country" : "Ger"
+	},
+	"contacts" : [
+		{
+			"name" : "Tom",
+			"relationship" : "Friend"
+		}
+	]
+}
+{
+	"_id" : ObjectId("5cc938641cd2cda82061b0e6"),
+	"first_name" : "Hot",
+	"last_name" : "Singh"
+}
+
+##For more examples refer: MongoDB working-1.txt
