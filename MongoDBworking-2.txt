@@ -4,15 +4,15 @@ Different tools
 Note* For linux replace/remove .exe and run commands from terminal.
 
 For example :
-C:\Program Files\MongoDB\Server\3.2\bin>mongostat.exe
+mongostat --host hostname 
 insert query update delete getmore command % dirty % used flushes vsize   res qr|qw ar|aw netIn netOut conn                      time
     *0    *0     *0     *0       0     1|0     0.0    0.0       0 4.20G 19.0M   0|0   0|0   79b  21.9k    1 2018-12-10T22:50:12+01:00
     *0    *0     *0     *0       0     1|0     0.0    0.0       0 4.20G 19.0M   0|0   0|0   79b  21.9k    1 2018-12-10T22:50:13+01:00
     *0    *0     *0     *0       0     1|0     0.0    0.0       0 4.20G 19.0M   0|0   0|0   79b  21.9k    1 2018-12-10T22:50:14+01:00
     *0    *0     *0     *0       0     1|0     0.0    0.0       0 4.20G 19.0M   0|0   0|0   79b  21.9k    1 2018-12-10T22:50:15+01:00
+Note** run mongostat and parallely test insert,querying,importing data to look at stats.
 
-C:\Program Files\MongoDB\Server\3.2\bin>mongotop.exe
-2018-12-10T22:51:18.702+0100    connected to: 127.0.0.1
+mongotop --host hostname
 
                          ns    total    read    write    2018-12-10T22:51:19+01:00
          admin.system.roles      0ms     0ms      0ms
@@ -37,9 +37,10 @@ test12.test123.mycollection      0ms     0ms      0ms
          mycustomers.test12      0ms     0ms      0ms
  test12.test12.mycollection      0ms     0ms      0ms
 test12.test123.mycollection      0ms     0ms      0ms
+Note** Look at collection level stats in terms or read and write
 
-C:\Program Files\MongoDB\Server\3.2\bin>mongoexport.exe -d mycustomers -c customers > customers.json
-C:\Program Files\MongoDB\Server\3.2\bin>type customers.json
+mongoexport -d mycustomers -c customers > customers.json
+cat customers.json
 {"_id":{"$oid":"5c0e47fdcb6ad0065017fc5d"},"first_name":"aj","last_name":"singh","gender":"male"}
 {"_id":{"$oid":"5c0e48f6cb6ad0065017fc5f"},"first_name":"daj","last_name":"singh","gender":"male"}
 {"_id":{"$oid":"5c0e58f6cb6ad0065017fc60"},"first_name":"ddcaj","last_name":"singhi"}
@@ -48,12 +49,12 @@ C:\Program Files\MongoDB\Server\3.2\bin>type customers.json
 {"_id":{"$oid":"5c0e598ecb6ad0065017fc63"},"first_name":"dddajy","last_name":"singhyy","address":{"street":23.0,"houseno":104.0}}
 
 
-C:\Program Files\MongoDB\Server\3.2\bin>mongoimport.exe -d mycustomers -c customerscopy < customers.json
+mongoimport -d mycustomers -c customerscopy < customers.json
 2018-12-11T01:41:15.291+0100    connected to: localhost
 2018-12-11T01:41:15.430+0100    imported 6 documents
 
 Taking binary backup of mongodb databases
-C:\Program Files\MongoDB\Server\3.2\bin>mongodump.exe
+mongodump
 2018-12-11T01:43:20.913+0100    writing admin.system.users to
 2018-12-11T01:43:20.915+0100    done dumping admin.system.users (1 document)
 2018-12-11T01:43:20.924+0100    writing admin.system.version to
@@ -70,13 +71,9 @@ C:\Program Files\MongoDB\Server\3.2\bin>mongodump.exe
 2018-12-11T01:43:20.984+0100    done dumping mycustomers.items (0 documents)
 
 Looking into dump created
-C:\Program Files\MongoDB\Server\3.2\bin\dump>cd admin
+\dump$cd admin
 
-C:\Program Files\MongoDB\Server\3.2\bin\dump\admin>dir/p
- Volume in drive C is Acer
- Volume Serial Number is 10AE-DF58
-
- Directory of C:\Program Files\MongoDB\Server\3.2\bin\dump\admin
+dump\admin
 
 12/11/2018  01:43 AM    <DIR>          .
 12/11/2018  01:43 AM    <DIR>          ..
@@ -87,15 +84,10 @@ C:\Program Files\MongoDB\Server\3.2\bin\dump\admin>dir/p
                4 File(s)            667 bytes
                2 Dir(s)  261,124,919,296 bytes free
 
-C:\Program Files\MongoDB\Server\3.2\bin\dump\admin>cd ..
 
-C:\Program Files\MongoDB\Server\3.2\bin\dump>cd mycustomers
+\dump>cd mycustomers
 
-C:\Program Files\MongoDB\Server\3.2\bin\dump\mycustomers>dir/p
- Volume in drive C is Acer
- Volume Serial Number is 10AE-DF58
-
-Directory of C:\Program Files\MongoDB\Server\3.2\bin\dump\mycustomers
+\dump\mycustomers
 
 12/11/2018  01:43 AM    <DIR>          .
 12/11/2018  01:43 AM    <DIR>          ..
@@ -112,11 +104,11 @@ Directory of C:\Program Files\MongoDB\Server\3.2\bin\dump\mycustomers
               10 File(s)          1,552 bytes
                2 Dir(s)  261,124,919,296 bytes free
 
-C:\Program Files\MongoDB\Server\3.2\bin>bsondump.exe dump\mycustomers\preferences.bson > testData.json
-C:\Program Files\MongoDB\Server\3.2\bin>bsondump.exe dump\mycustomers\customerscopy.bson > testData1.json
+bsondump dump\mycustomers\preferences.bson > testData.json
+bsondump dump\mycustomers\customerscopy.bson > testData1.json
 2018-12-11T01:48:53.428+0100    6 objects found
 
-C:\Program Files\MongoDB\Server\3.2\bin>type testData1.json
+cat testData1.json
 {"_id":{"$oid":"5c0e47fdcb6ad0065017fc5d"},"first_name":"aj","last_name":"singh","gender":"male"}
 {"_id":{"$oid":"5c0e598ecb6ad0065017fc62"},"first_name":"ddcajy","last_name":"singhiy"}
 {"_id":{"$oid":"5c0e598ecb6ad0065017fc63"},"first_name":"dddajy","last_name":"singhyy","address":{"street":23.0,"houseno":104.0}}
@@ -136,7 +128,7 @@ check with mmf:false
 contents of testConfig.txt
 {nThreads:16,fileSizeMB:100,r:true}
 
-C:\Program Files\MongoDB\Server\3.2\bin>mongoperf.exe < "c:\Users\ajay\Documents\testConfig.txt"
+mongoperf < linuxpath\testConfig.txt"
 mongoperf
 use -h for help
 parsed options:
@@ -213,28 +205,29 @@ read:1 write:0
 Can be useful to check physical I/O operations
 
 #mongofiles
-Provided interface for the objects stored in FS and GridFS (convention for storing large files in mongodb )
+Provides interface for the objects stored in FS and GridFS (convention for storing large files in mongodb )
 It supports list,put,get,delete, search etc
 
 Putting content in gridFS
-C:\Program Files\MongoDB\Server\3.2\bin>mongofiles.exe --host localhost:27017 -d mycustomers put c:\Users\ajay\Documents\testConfig.txt
+mongofiles --host localhost:27017 -d mycustomers put \testConfig.txt
 2018-12-11T02:30:05.136+0100    connected to: localhost:27017
-added file: c:\Users\ajay\Documents\testConfig.txt
+added file: \testConfig.txt
 
 copies file from local fs to mongodb gridfs
 
 Listing content from gridFS
-C:\Program Files\MongoDB\Server\3.2\bin>mongofiles.exe --host localhost:27017 -d mycustomers list
+mongofiles --host localhost:27017 -d mycustomers list
 2018-12-11T02:32:39.886+0100    connected to: localhost:27017
 
-c:\Users\ajay\Documents\testConfig.txt  35
+\testConfig.txt  35
 
 disconnecting local fs from gridFS
 
-C:\Program Files\MongoDB\Server\3.2\bin>mongofiles.exe --host localhost:27017 delete  c:\Users\ajay\Documents\testConfig.txt
+mongofiles --host localhost:27017 delete  \testConfig.txt
 2018-12-11T02:34:21.043+0100    connected to: localhost:27017
-successfully deleted all instances of 'c:\Users\ajay\Documents\testConfig.txt' from GridFS
+successfully deleted all instances of \testConfig.txt from GridFS
 
 #mongos
 mongodb Shard (routing service for mongodb for sharding configuration)
 This processes queries from appln layer and maintain sharded cluster, thus helps in sharding
+
