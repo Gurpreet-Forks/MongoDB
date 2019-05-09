@@ -26,26 +26,25 @@ mongod --configsvr --dbpath cfg2 --port 26052 --logpath log.cfg2 --logappend
 
 #"shard servers"(mongod data servers)(shardsvr paramter tells ,this is part of a sharded cluster)
 #Don't use such smallfiles nor such a small oplogSize in production,these are here all running on one machine
-mongod --shardsvr --replSet a --dbpath a0 --logpath log.a0 --port 27000 --fork --logappend  --smallfiles --oplogsize 50
-mongod --shardsvr --replSet a --dbpath a1 --logpath log.a1 --port 27001 --fork --logappend  --smallfiles --oplogsize 50
-mongod --shardsvr --replSet a --dbpath a2 --logpath log.a2 --port 27002 --fork --logappend  --smallfiles --oplogsize 50
-mongod --shardsvr --replSet b --dbpath b0 --logpath log.b0 --port 27100 --fork --logappend  --smallfiles --oplogsize 50
-mongod --shardsvr --replSet b --dbpath b1 --logpath log.b1 --port 27101 --fork --logappend  --smallfiles --oplogsize 50
-mongod --shardsvr --replSet b --dbpath b2 --logpath log.b2 --port 27102 --fork --logappend  --smallfiles --oplogsize 50
-mongod --shardsvr --replSet c --dbpath c0 --logpath log.c0 --port 27200 --fork --logappend  --smallfiles --oplogsize 50
-mongod --shardsvr --replSet c --dbpath c1 --logpath log.c1 --port 27201 --fork --logappend  --smallfiles --oplogsize 50
-mongod --shardsvr --replSet c --dbpath c2 --logpath log.c2 --port 27202 --fork --logappend  --smallfiles --oplogsize 50
-mongod --shardsvr --replSet d --dbpath d0 --logpath log.d0 --port 27300 --fork --logappend  --smallfiles --oplogsize 50
-mongod --shardsvr --replSet d --dbpath d1 --logpath log.d1 --port 27301 --fork --logappend  --smallfiles --oplogsize 50
-mongod --shardsvr --replSet d --dbpath d2 --logpath log.d2 --port 27302 --fork --logappend  --smallfiles --oplogsize 50
+mongod --shardsvr --replSet a --dbpath a0 --logpath log.a0 --port 27000 --logappend  --smallfiles --oplogSize 50 --fork
+mongod --shardsvr --replSet a --dbpath a1 --logpath log.a1 --port 27001 --logappend  --smallfiles --oplogSize 50 --fork
+mongod --shardsvr --replSet a --dbpath a2 --logpath log.a2 --port 27002 --logappend  --smallfiles --oplogSize 50 --fork
+mongod --shardsvr --replSet b --dbpath b0 --logpath log.b0 --port 27100 --logappend  --smallfiles --oplogSize 50 --fork
+mongod --shardsvr --replSet b --dbpath b1 --logpath log.b1 --port 27101 --logappend  --smallfiles --oplogSize 50 --fork
+mongod --shardsvr --replSet b --dbpath b2 --logpath log.b2 --port 27102 --logappend  --smallfiles --oplogSize 50 --fork
+mongod --shardsvr --replSet c --dbpath c0 --logpath log.c0 --port 27200 --logappend  --smallfiles --oplogSize 50 --fork
+mongod --shardsvr --replSet c --dbpath c1 --logpath log.c1 --port 27201 --logappend  --smallfiles --oplogSize 50 --fork
+mongod --shardsvr --replSet c --dbpath c2 --logpath log.c2 --port 27202 --logappend  --smallfiles --oplogSize 50 --fork
+mongod --shardsvr --replSet d --dbpath d0 --logpath log.d0 --port 27300 --logappend  --smallfiles --oplogSize 50 --fork
+mongod --shardsvr --replSet d --dbpath d1 --logpath log.d1 --port 27301 --logappend  --smallfiles --oplogSize 50 --fork
+mongod --shardsvr --replSet d --dbpath d2 --logpath log.d2 --port 27302 --logappend  --smallfiles --oplogSize 50 --fork
 
 #mongos processes(although normally mongos should be using default ports)
 NOte** ensure mongod's(shard servers)/config servers don't use this port 27017)
-mongos --configdb c1:26050,c1:26051,c1:26052 --fork --logappend --logpath log.mongos0 (default port ie 27017)
-mongos --configdb c1:26050,c1:26051,c1:26052 --fork --logappend --logpath log.mongos1 --port 26061
-mongos --configdb c1:26050,c1:26051,c1:26052 --fork --logappend --logpath log.mongos2 --port 26062
-mongos --configdb c1:26050,c1:26051,c1:26052 --fork --logappend --logpath log.mongos3 --port 26063
-
+mongos --configdb a/a3:26050,a3:26051,a3:26052 --logappend --logpath log.mongos0 --fork (default port ie 27017)
+mongos --configdb "b/a3:26050,a3:26051,a3:26052" --logappend --logpath log.mongos1 --port 26061 --fork
+mongos --configdb "c/a3:26050,a3:26051,a3:26052" --logappend --logpath log.mongos2 --port 26062 --fork
+mongos --configdb "d/a3:26050,a3:26051,a3:26052" --logappend --logpath log.mongos3 --port 26063 --fork
 echo
 ps -A | grep mongo
 
