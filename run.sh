@@ -40,8 +40,8 @@ mongod --shardsvr --replSet d --dbpath d1 --logpath log.d1 --port 27301 --logapp
 mongod --shardsvr --replSet d --dbpath d2 --logpath log.d2 --port 27302 --logappend  --smallfiles --oplogSize 50 --fork
 
 #mongos processes(although normally mongos should be using default ports)
-NOte** ensure mongod's(shard servers)/config servers don't use this port 27017)
-mongos --configdb a/a3:26050,a3:26051,a3:26052 --logappend --logpath log.mongos0 --fork (default port ie 27017)
+#NOte** ensure mongod's(shard servers)/config servers don't use this port 27017)
+mongos --configdb "a/a3:26050,a3:26051,a3:26052" --logappend --logpath log.mongos0 --fork (default port ie 27017)
 mongos --configdb "b/a3:26050,a3:26051,a3:26052" --logappend --logpath log.mongos1 --port 26061 --fork
 mongos --configdb "c/a3:26050,a3:26051,a3:26052" --logappend --logpath log.mongos2 --port 26062 --fork
 mongos --configdb "d/a3:26050,a3:26051,a3:26052" --logappend --logpath log.mongos3 --port 26063 --fork

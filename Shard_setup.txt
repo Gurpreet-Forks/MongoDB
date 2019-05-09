@@ -5,24 +5,6 @@ ie 12 mongod (shard servers)
 We will run 4 mongos processes.
 We will run 3 config servers.
 
-Create directories for shards and for config servers
-start config servers
-mongod --configsvr --dbpath cfg0 --port 26050 --logpath log.cfg0 --logappend
-mongod --configsvr --dbpath cfg1 --port 26051 --logpath log.cfg1 --logappend
-mongod --configsvr --dbpath cfg2 --port 26052 --logpath log.cfg2 --logappend
-
-
-start shard servers
-mongodb --shardsvr --replSet a --dbpath xx --logpath yy --port 27000 --fork --logappend  --smallfiles --oplogsize 50
-*12
-
-start mongos processes
-mongos --configdb c2:26050,c2:26061,c2:26052 --fork --logappend --logpath log.mongos0 (default port ie 27017)
-*4			
-(2)--port 26061
-(3)--port 26062
-(4)--port 26063
-
 ===================================
 run the commands in run.sh scripts or modify and run the script.
 
