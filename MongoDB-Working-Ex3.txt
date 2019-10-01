@@ -1,0 +1,409 @@
+#Shows processes running and time consumed
+#Any process running for more than 100 ms would be considered as a slow process
+
+rs0:PRIMARY> db.currentOp()
+{
+	"inprog" : [
+		{
+			"desc" : "conn25",
+			"threadId" : "140715027502848",
+			"connectionId" : 25,
+			"client" : "192.168.182.13:40080",
+			"clientMetadata" : {
+				"driver" : {
+					"name" : "NetworkInterfaceASIO-RS",
+					"version" : "3.4.23"
+				},
+				"os" : {
+					"type" : "Linux",
+					"name" : "Ubuntu",
+					"architecture" : "x86_64",
+					"version" : "16.04"
+				}
+			},
+			"active" : true,
+			"opid" : 16993,
+			"secs_running" : 0,
+			"microsecs_running" : NumberLong(465535),
+			"op" : "getmore",
+			"ns" : "local.oplog.rs",
+			"query" : {
+				"getMore" : NumberLong("25350395787"),
+				"collection" : "oplog.rs",
+				"maxTimeMS" : NumberLong(5000),
+				"term" : NumberLong(1),
+				"lastKnownCommittedOpTime" : {
+					"ts" : Timestamp(1569950772, 1),
+					"t" : NumberLong(1)
+				}
+			},
+			"originatingCommand" : {
+				"find" : "oplog.rs",
+				"filter" : {
+					"ts" : {
+						"$gte" : Timestamp(1569948411, 1)
+					}
+				},
+				"tailable" : true,
+				"oplogReplay" : true,
+				"awaitData" : true,
+				"maxTimeMS" : NumberLong(60000),
+				"term" : NumberLong(1),
+				"readConcern" : {
+					"afterOpTime" : {
+						"ts" : Timestamp(1569948411, 1),
+						"t" : NumberLong(1)
+					}
+				}
+			},
+			"planSummary" : "COLLSCAN",
+			"numYields" : 0,
+			"locks" : {
+				
+			},
+			"waitingForLock" : false,
+			"lockStats" : {
+				"Global" : {
+					"acquireCount" : {
+						"r" : NumberLong(2)
+					}
+				},
+				"Database" : {
+					"acquireCount" : {
+						"r" : NumberLong(1)
+					}
+				},
+				"oplog" : {
+					"acquireCount" : {
+						"r" : NumberLong(1)
+					}
+				}
+			}
+		},
+		{
+			"desc" : "conn15",
+			"threadId" : "140715028555520",
+			"connectionId" : 15,
+			"client" : "192.168.182.14:39866",
+			"clientMetadata" : {
+				"driver" : {
+					"name" : "NetworkInterfaceASIO-RS",
+					"version" : "3.4.23"
+				},
+				"os" : {
+					"type" : "Linux",
+					"name" : "Ubuntu",
+					"architecture" : "x86_64",
+					"version" : "16.04"
+				}
+			},
+			"active" : true,
+			"opid" : 16992,
+			"secs_running" : 0,
+			"microsecs_running" : NumberLong(465664),
+			"op" : "getmore",
+			"ns" : "local.oplog.rs",
+			"query" : {
+				"getMore" : NumberLong("22751094655"),
+				"collection" : "oplog.rs",
+				"maxTimeMS" : NumberLong(5000),
+				"term" : NumberLong(1),
+				"lastKnownCommittedOpTime" : {
+					"ts" : Timestamp(1569950772, 1),
+					"t" : NumberLong(1)
+				}
+			},
+			"originatingCommand" : {
+				"find" : "oplog.rs",
+				"filter" : {
+					"ts" : {
+						"$gte" : Timestamp(1569948411, 1)
+					}
+				},
+				"tailable" : true,
+				"oplogReplay" : true,
+				"awaitData" : true,
+				"maxTimeMS" : NumberLong(60000),
+				"term" : NumberLong(1),
+				"readConcern" : {
+					"afterOpTime" : {
+						"ts" : Timestamp(1569948411, 1),
+						"t" : NumberLong(1)
+					}
+				}
+			},
+			"planSummary" : "COLLSCAN",
+			"numYields" : 0,
+			"locks" : {
+				
+			},
+			"waitingForLock" : false,
+			"lockStats" : {
+				"Global" : {
+					"acquireCount" : {
+						"r" : NumberLong(2)
+					}
+				},
+				"Database" : {
+					"acquireCount" : {
+						"r" : NumberLong(1)
+					}
+				},
+				"oplog" : {
+					"acquireCount" : {
+						"r" : NumberLong(1)
+					}
+				}
+			}
+		},
+		{
+			"desc" : "conn28",
+			"threadId" : "140715627419392",
+			"connectionId" : 28,
+			"client" : "192.168.182.12:33698",
+			"appName" : "MongoDB Shell",
+			"clientMetadata" : {
+				"application" : {
+					"name" : "MongoDB Shell"
+				},
+				"driver" : {
+					"name" : "MongoDB Internal Client",
+					"version" : "3.4.23"
+				},
+				"os" : {
+					"type" : "Linux",
+					"name" : "Ubuntu",
+					"architecture" : "x86_64",
+					"version" : "16.04"
+				}
+			},
+			"active" : true,
+			"opid" : 16995,
+			"secs_running" : 0,
+			"microsecs_running" : NumberLong(51),
+			"op" : "command",
+			"ns" : "admin.$cmd",
+			"query" : {
+				"currentOp" : 1
+			},
+			"numYields" : 0,
+			"locks" : {
+				
+			},
+			"waitingForLock" : false,
+			"lockStats" : {
+				
+			}
+		},
+		{
+			"desc" : "WT RecordStoreThread: local.oplog.rs",
+			"threadId" : "140715401058048",
+			"active" : true,
+			"opid" : 1051,
+			"secs_running" : 2997,
+			"microsecs_running" : NumberLong("2997102487"),
+			"op" : "none",
+			"ns" : "local.oplog.rs",
+			"query" : {
+				
+			},
+			"numYields" : 0,
+			"locks" : {
+				
+			},
+			"waitingForLock" : false,
+			"lockStats" : {
+				"Global" : {
+					"acquireCount" : {
+						"r" : NumberLong(1),
+						"w" : NumberLong(1)
+					},
+					"acquireWaitCount" : {
+						"w" : NumberLong(1)
+					},
+					"timeAcquiringMicros" : {
+						"w" : NumberLong(14870)
+					}
+				},
+				"Database" : {
+					"acquireCount" : {
+						"w" : NumberLong(1)
+					}
+				},
+				"oplog" : {
+					"acquireCount" : {
+						"w" : NumberLong(1)
+					}
+				}
+			}
+		},
+		{
+			"desc" : "ReplBatcher",
+			"threadId" : "140715065349888",
+			"active" : true,
+			"opid" : 16986,
+			"op" : "none",
+			"ns" : "",
+			"query" : {
+				
+			},
+			"numYields" : 0,
+			"locks" : {
+				
+			},
+			"waitingForLock" : false,
+			"lockStats" : {
+				
+			}
+		},
+		{
+			"desc" : "NoopWriter",
+			"threadId" : "140715048564480",
+			"active" : true,
+			"opid" : 16958,
+			"op" : "none",
+			"ns" : "",
+			"query" : {
+				
+			},
+			"numYields" : 0,
+			"locks" : {
+				
+			},
+			"waitingForLock" : false,
+			"lockStats" : {
+				
+			}
+		},
+		{
+			"desc" : "rsSync",
+			"threadId" : "140715216418560",
+			"active" : true,
+			"opid" : 16987,
+			"op" : "none",
+			"ns" : "",
+			"query" : {
+				
+			},
+			"numYields" : 0,
+			"locks" : {
+				
+			},
+			"waitingForLock" : false,
+			"lockStats" : {
+				
+			}
+		}
+	],
+	"ok" : 1
+}
+
+rs0:PRIMARY> db.killOp(16995)
+{ "info" : "attempting to kill op", "ok" : 1 }
+
+#using mongotop
+root@m1:~# mongotop --host m1
+2019-10-01T19:36:59.324+0200	connected to: m1
+
+                    ns    total    read    write    2019-10-01T19:37:00+02:00
+        local.oplog.rs      1ms     1ms      0ms                             
+    admin.system.roles      0ms     0ms      0ms                             
+  admin.system.version      0ms     0ms      0ms                             
+              local.me      0ms     0ms      0ms                             
+local.replset.election      0ms     0ms      0ms                             
+local.replset.minvalid      0ms     0ms      0ms                             
+     local.startup_log      0ms     0ms      0ms                             
+  local.system.replset      0ms     0ms      0ms                             
+
+                    ns    total    read    write    2019-10-01T19:37:01+02:00
+        local.oplog.rs      9ms     9ms      0ms                             
+    admin.system.roles      0ms     0ms      0ms                             
+  admin.system.version      0ms     0ms      0ms                             
+              local.me      0ms     0ms      0ms                             
+local.replset.election      0ms     0ms      0ms                             
+local.replset.minvalid      0ms     0ms      0ms                             
+     local.startup_log      0ms     0ms      0ms                             
+  local.system.replset      0ms     0ms      0ms                             
+
+
+^C2019-10-01T19:37:04.061+0200	signal 'interrupt' received; forcefully terminating
+
+#
+rs0:PRIMARY> db.getProfilingStatus()
+{ "was" : 0, "slowms" : 100 }
+rs0:PRIMARY> db.getProfilingLevel()
+0
+rs0:PRIMARY> 
+
+Profiling levels
+0--disabled
+1--enabled(100 ms)
+2--enabled for everything
+
+To check performance we can enable the 'PROFILER'
+rs0:PRIMARY> db.setProfilingLevel(1)
+{ "was" : 0, "slowms" : 100, "ok" : 1 }
+rs0:PRIMARY> db.getProfilingLevel()
+1
+
+#Testing profiler
+rs0:PRIMARY> for(i=1;i<=100000;i++)db.emp.insert({empid:i,name: "Xyuuuuuuuuvfhjihgsh uwec iwc ewue"})
+^C
+do you want to kill the current op(s) on the server? (y/n): y
+2019-10-01T19:54:26.432+0200 I CONTROL  [main] shutting down with code:0
+root@m1:~# mongo --host m1 --port 27017
+MongoDB shell version v3.4.23
+connecting to: mongodb://m1:27017/
+MongoDB server version: 3.4.23
+Server has startup warnings: 
+2019-10-01T18:22:43.427+0200 I STORAGE  [initandlisten] 
+2019-10-01T18:22:43.428+0200 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2019-10-01T18:22:43.428+0200 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2019-10-01T18:22:43.503+0200 I CONTROL  [initandlisten] 
+2019-10-01T18:22:43.503+0200 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2019-10-01T18:22:43.503+0200 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2019-10-01T18:22:43.503+0200 I CONTROL  [initandlisten] ** WARNING: You are running this process as the root user, which is not recommended.
+2019-10-01T18:22:43.503+0200 I CONTROL  [initandlisten] 
+rs0:PRIMARY> db.emp.count()
+17511
+
+#checking if entries were added by profile
+rs0:PRIMARY> db.system.profile.find()
+
+#no entries as we cancelled the query, lets change profiling capture for anything more than 5 ms
+
+rs0:PRIMARY> db.setProfilingLevel(1,5)
+{ "was" : 0, "slowms" : 100, "ok" : 1 }
+rs0:PRIMARY> db.getProfilingLevel()
+1
+
+#running the query
+rs0:PRIMARY> for(i=1;i<=100000;i++)db.emp.insert({empid:i,name: "Xyuuuuuuuuvfhjihgsh uwec iwc ewue"})
+^C2019-10-01T19:57:32.864+0200 I CONTROL  [main] shutting down with code:0
+
+#looking in profile collection, updated by profiler
+rs0:PRIMARY> db.system.profile.find()
+{ "op" : "insert", "ns" : "test.emp", "query" : { "insert" : "emp", "documents" : [ { "_id" : ObjectId("5d939377d6006a5e8d570f16"), "empid" : 11762, "name" : "Xyuuuuuuuuvfhjihgsh uwec iwc ewue" } ], "ordered" : true }, "ninserted" : 1, "keysInserted" : 1, "numYield" : 0, "locks" : { "Global" : { "acquireCount" : { "r" : NumberLong(2), "w" : NumberLong(2) } }, "Database" : { "acquireCount" : { "w" : NumberLong(2) } }, "Collection" : { "acquireCount" : { "w" : NumberLong(1) } }, "Metadata" : { "acquireCount" : { "w" : NumberLong(1) } }, "oplog" : { "acquireCount" : { "w" : NumberLong(1) } } }, "responseLength" : 89, "protocol" : "op_command", "millis" : 6, "ts" : ISODate("2019-10-01T17:57:11.299Z"), "client" : "192.168.182.12", "appName" : "MongoDB Shell", "allUsers" : [ ], "user" : "" }
+{ "op" : "insert", "ns" : "test.emp", "query" : { "insert" : "emp", "documents" : [ { "_id" : ObjectId("5d939378d6006a5e8d57193e"), "empid" : 14362, "name" : "Xyuuuuuuuuvfhjihgsh uwec iwc ewue" } ], "ordered" : true }, "ninserted" : 1, "keysInserted" : 1, "numYield" : 0, "locks" : { "Global" : { "acquireCount" : { "r" : NumberLong(2), "w" : NumberLong(2) } }, "Database" : { "acquireCount" : { "w" : NumberLong(2) } }, "Collection" : { "acquireCount" : { "w" : NumberLong(1) } }, "Metadata" : { "acquireCount" : { "w" : NumberLong(1) } }, "oplog" : { "acquireCount" : { "w" : NumberLong(1) } } }, "responseLength" : 89, "protocol" : "op_command", "millis" : 7, "ts" : ISODate("2019-10-01T17:57:12.277Z"), "client" : "192.168.182.12", "appName" : "MongoDB Shell", "allUsers" : [ ], "user" : "" }
+{ "op" : "insert", "ns" : "test.emp", "query" : { "insert" : "emp", "documents" : [ { "_id" : ObjectId("5d939379d6006a5e8d572371"), "empid" : 16973, "name" : "Xyuuuuuuuuvfhjihgsh uwec iwc ewue" } ], "ordered" : true }, "ninserted" : 1, "keysInserted" : 1, "numYield" : 0, "locks" : { "Global" : { "acquireCount" : { "r" : NumberLong(2), "w" : NumberLong(2) } }, "Database" : { "acquireCount" : { "w" : NumberLong(2) } }, "Collection" : { "acquireCount" : { "w" : NumberLong(1) } }, "Metadata" : { "acquireCount" : { "w" : NumberLong(1) } }, "oplog" : { "acquireCount" : { "w" : NumberLong(1) } } }, "responseLength" : 89, "protocol" : "op_command", "millis" : 5, "ts" : ISODate("2019-10-01T17:57:13.232Z"), "client" : "192.168.182.12", "appName" : "MongoDB Shell", "allUsers" : [ ], "user" : "" }
+
+rs0:PRIMARY> db.setProfilingLevel(0)
+{ "was" : 1, "slowms" : 5, "ok" : 1 }
+rs0:PRIMARY> db.getProfilingLevel()
+0
+
+
+#kill all the mongod processes
+#Start again
+mongod --port 27017 --dbpath /srv/mongodb/db0 --replSet rs0 --bind_ip 192.168.182.12 --httpinterface --rest
+mongod --port 27017 --dbpath /srv/mongodb/db1 --replSet rs0 --bind_ip 192.168.182.13
+mongod --port 27017 --dbpath /srv/mongodb/db2 --replSet rs0 --bind_ip 192.168.182.14
+
+#now access http interface
+http://m1:28017/
+
+#we can look at serverstats here same as db.serverStats()
+#db.stats()
+#db.emp.stats()
+#db.printReplicationInfo()
+

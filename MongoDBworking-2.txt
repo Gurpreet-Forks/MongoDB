@@ -116,6 +116,56 @@ cat testData1.json
 {"_id":{"$oid":"5c0e58f6cb6ad0065017fc60"},"first_name":"ddcaj","last_name":"singhi"}
 {"_id":{"$oid":"5c0e58f6cb6ad0065017fc61"},"first_name":"dddaj","last_name":"singhy","gender":"male"}
 
+===================
+root@m1:~# mongorestore --host m1 dump/test/emp.bson -d rest
+2019-10-01T21:52:44.581+0200	checking for collection data in dump/test/emp.bson
+2019-10-01T21:52:44.584+0200	reading metadata for rest.emp from dump/test/emp.metadata.json
+2019-10-01T21:52:44.601+0200	restoring rest.emp from dump/test/emp.bson
+2019-10-01T21:52:44.663+0200	no indexes to restore
+2019-10-01T21:52:44.663+0200	finished restoring rest.emp (2 documents)
+2019-10-01T21:52:44.663+0200	done
+
+root@m1:~# mongodump --host m1 
+2019-10-01T21:52:58.463+0200	writing admin.system.version to 
+2019-10-01T21:52:58.463+0200	done dumping admin.system.version (1 document)
+2019-10-01T21:52:58.463+0200	writing test.emp to 
+2019-10-01T21:52:58.464+0200	writing rest.emp to 
+2019-10-01T21:52:58.464+0200	writing admin.system.profile to 
+2019-10-01T21:52:58.465+0200	done dumping rest.emp (2 documents)
+2019-10-01T21:52:58.478+0200	done dumping admin.system.profile (0 documents)
+2019-10-01T21:52:58.670+0200	done dumping test.emp (87855 documents)
+
+root@m1:~# mongo --host m1
+MongoDB shell version v3.4.23
+connecting to: mongodb://m1:27017/
+MongoDB server version: 3.4.23
+Server has startup warnings: 
+2019-10-01T20:26:19.312+0200 I STORAGE  [initandlisten] 
+2019-10-01T20:26:19.312+0200 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2019-10-01T20:26:19.312+0200 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2019-10-01T20:26:19.663+0200 I CONTROL  [initandlisten] 
+2019-10-01T20:26:19.663+0200 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2019-10-01T20:26:19.663+0200 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2019-10-01T20:26:19.663+0200 I CONTROL  [initandlisten] ** WARNING: You are running this process as the root user, which is not recommended.
+2019-10-01T20:26:19.663+0200 I CONTROL  [initandlisten] 
+
+rs0:PRIMARY> show dbs
+admin  0.000GB
+local  0.004GB
+rest   0.000GB
+test   0.003GB
+
+rs0:PRIMARY> use rest
+switched to db rest
+
+rs0:PRIMARY> show collections
+emp
+
+rs0:PRIMARY> db.emp.find()
+{ "_id" : ObjectId("5d9392cac3f9bbca2b9d2c0b"), "empid" : 2, "name" : "Xyuuuuuuuuvfhjihgsh uwec iwc ewue" }
+{ "_id" : ObjectId("5d939373d6006a5e8d56e126"), "empid" : 2, "name" : "Xyuuuuuuuuvfhjihgsh uwec iwc ewue" }
+rs0:PRIMARY> 
+
 ====================
 #mongoperf-to check performance of i/o server independent of mongodb 
 --it performs simple timed random disk i/os
