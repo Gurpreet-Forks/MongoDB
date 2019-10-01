@@ -166,6 +166,11 @@ rs0:PRIMARY> db.emp.find()
 { "_id" : ObjectId("5d939373d6006a5e8d56e126"), "empid" : 2, "name" : "Xyuuuuuuuuvfhjihgsh uwec iwc ewue" }
 rs0:PRIMARY> 
 
+#notice "no indexes were restored"
+#copy contents of /data/db into a new directory and start new mongod process using new directory as dbpath
+#indexes will still not be rebuilt
+#cannot do this while cluster/mongod instance is running
+
 ====================
 #mongoperf-to check performance of i/o server independent of mongodb 
 --it performs simple timed random disk i/os
